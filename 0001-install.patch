@@ -1,0 +1,135 @@
+From 2148e74d12a9ddad35eb0a6a28cc17d64c1a1cfd Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 17 Sep 2024 16:48:11 +0800
+Subject: [PATCH] install
+
+---
+ src/CsvFilePlugin/CsvFilePlugin.pro                   |  2 +-
+ src/CsvFilePluginSemiColon/CsvFilePluginSemiColon.pro |  2 +-
+ src/Interpolator/Interpolator.desktop                 | 11 +++++++++++
+ src/Interpolator/Interpolator.pro                     | 11 +++++++----
+ src/PeaksChooser/PeaksChooser.pro                     |  6 ++++++
+ src/PeaksTextFilePlugin/PeaksTextFilePlugin.pro       |  2 +-
+ src/SpaFilePlugin/SpaFilePlugin.pro                   |  2 +-
+ src/TabSeparatedPlugin/TabSeparatedPlugin.pro         |  2 +-
+ 8 files changed, 29 insertions(+), 9 deletions(-)
+ create mode 100644 src/Interpolator/Interpolator.desktop
+
+diff --git a/src/CsvFilePlugin/CsvFilePlugin.pro b/src/CsvFilePlugin/CsvFilePlugin.pro
+index db873c72..38bceae8 100644
+--- a/src/CsvFilePlugin/CsvFilePlugin.pro
++++ b/src/CsvFilePlugin/CsvFilePlugin.pro
+@@ -30,6 +30,6 @@ HEADERS += \
+ DISTFILES += PeaksTextFilePlugin.json 
+ 
+ unix {
+-    target.path = $$[QT_INSTALL_PLUGINS]/generic
++    target.path = $$PREFIX/lib
+     INSTALLS += target
+ }
+diff --git a/src/CsvFilePluginSemiColon/CsvFilePluginSemiColon.pro b/src/CsvFilePluginSemiColon/CsvFilePluginSemiColon.pro
+index aaa84d21..59c927ad 100644
+--- a/src/CsvFilePluginSemiColon/CsvFilePluginSemiColon.pro
++++ b/src/CsvFilePluginSemiColon/CsvFilePluginSemiColon.pro
+@@ -30,6 +30,6 @@ HEADERS += \
+ DISTFILES += PeaksTextFilePlugin.json 
+ 
+ unix {
+-    target.path = $$[QT_INSTALL_PLUGINS]/generic
++    target.path = $$PREFIX/lib
+     INSTALLS += target
+ }
+diff --git a/src/Interpolator/Interpolator.desktop b/src/Interpolator/Interpolator.desktop
+new file mode 100644
+index 00000000..0102aa7c
+--- /dev/null
++++ b/src/Interpolator/Interpolator.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=Interpolator
++Name=Interpolator
++Name[zh_CN]=Interpolator
++Icon=emblem-mounted
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=Interpolator
++Version=1.0
+\ No newline at end of file
+diff --git a/src/Interpolator/Interpolator.pro b/src/Interpolator/Interpolator.pro
+index 6ccd79e8..e966efd5 100644
+--- a/src/Interpolator/Interpolator.pro
++++ b/src/Interpolator/Interpolator.pro
+@@ -49,10 +49,13 @@ FORMS += \
+         chooselocaledialog.ui \
+         mainwindow.ui
+ 
+-# Default rules for deployment.
+-qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
+-!isEmpty(target.path): INSTALLS += target
++target.path = $$PREFIX/bin
++desktop.files = Interpolator.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons/hicolor/scalable/apps/
++icons.files = icons/Papirus/8x8/emblems/emblem-mounted.svg
++
++INSTALLS += target desktop icons
+ 
+ RESOURCES += \
+     res.qrc
+diff --git a/src/PeaksChooser/PeaksChooser.pro b/src/PeaksChooser/PeaksChooser.pro
+index 059d955b..aeb5dd86 100644
+--- a/src/PeaksChooser/PeaksChooser.pro
++++ b/src/PeaksChooser/PeaksChooser.pro
+@@ -46,3 +46,9 @@ DISTFILES += \
+ 
+ FORMS += \
+     peakschooserwindow.ui
++
++
++unix {
++    target.path = $$PREFIX/lib
++    INSTALLS += target
++}
+\ No newline at end of file
+diff --git a/src/PeaksTextFilePlugin/PeaksTextFilePlugin.pro b/src/PeaksTextFilePlugin/PeaksTextFilePlugin.pro
+index 6d74ac03..040307c9 100644
+--- a/src/PeaksTextFilePlugin/PeaksTextFilePlugin.pro
++++ b/src/PeaksTextFilePlugin/PeaksTextFilePlugin.pro
+@@ -30,6 +30,6 @@ HEADERS += \
+ DISTFILES += PeaksTextFilePlugin.json 
+ 
+ unix {
+-    target.path = $$[QT_INSTALL_PLUGINS]/generic
++    target.path = $$PREFIX/lib
+     INSTALLS += target
+ }
+diff --git a/src/SpaFilePlugin/SpaFilePlugin.pro b/src/SpaFilePlugin/SpaFilePlugin.pro
+index 3695743c..88e90ecf 100644
+--- a/src/SpaFilePlugin/SpaFilePlugin.pro
++++ b/src/SpaFilePlugin/SpaFilePlugin.pro
+@@ -30,6 +30,6 @@ HEADERS += \
+ DISTFILES += SpaFilePlugin.json
+ 
+ unix {
+-    target.path = $$[QT_INSTALL_PLUGINS]/generic
++    target.path = $$PREFIX/lib
+     INSTALLS += target
+ }
+diff --git a/src/TabSeparatedPlugin/TabSeparatedPlugin.pro b/src/TabSeparatedPlugin/TabSeparatedPlugin.pro
+index 3a77ad0d..253558e5 100644
+--- a/src/TabSeparatedPlugin/TabSeparatedPlugin.pro
++++ b/src/TabSeparatedPlugin/TabSeparatedPlugin.pro
+@@ -30,6 +30,6 @@ HEADERS += \
+ DISTFILES += TabSeparatedPlugin.json 
+ 
+ unix {
+-    target.path = $$[QT_INSTALL_PLUGINS]/generic
++    target.path = $$PREFIX/lib
+     INSTALLS += target
+ }
+-- 
+2.43.4
+
